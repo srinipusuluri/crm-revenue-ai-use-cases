@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in CRM Revenue Cloud - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --revenue-blue: #2563eb;
+            --money-green: #10b981;
+            --contract-orange: #f59e0b;
+            --billing-purple: #8b5cf6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--revenue-blue), var(--money-green), var(--contract-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--revenue-blue), var(--money-green));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--revenue-blue), var(--money-green), var(--contract-orange));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(37, 99, 235, 0.2); color: var(--revenue-blue); }
+        .icon.gen { background: rgba(16, 185, 129, 0.2); color: var(--money-green); }
+        .icon.ag { background: rgba(139, 92, 246, 0.2); color: var(--billing-purple); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--revenue-blue), var(--money-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--revenue-blue);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--revenue-blue);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--revenue-blue);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .revenue-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .money-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .contract-badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 AI in CRM Revenue Cloud</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in CPQ, Billing, Pricing, and Revenue Optimization</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for pricing optimization, revenue forecasting, and contract management
+            </p>
+
+            <div class="card-grid">
+                <!-- Pricing Optimization Models -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">💰</div>
+                        <div>
+                            <div class="card-title">Pricing Optimization</div>
+                            <div class="card-subtitle">Price Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize pricing strategies by analyzing market conditions, competitor pricing, customer behavior, and historical sales data.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Pricing Optimization</span>
+                            <span class="tech-tag">Market Analysis</span>
+                            <span class="tech-tag">Competitor Analysis</span>
+                            <span class="tech-tag">Demand Forecasting</span>
+                            <span class="tech-tag">Revenue Maximization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Market Data → Price Analysis → Optimization → Strategy → Implementation → Results</div>
+                            <div class="architecture-item">Pricing Data → Analysis → Optimization → Strategy → Revenue → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical pricing data</li>
+                                <li>Market conditions</li>
+                                <li>Competitor pricing</li>
+                                <li>Customer behavior</li>
+                                <li>Demand patterns</li>
+                                <li>Cost structures</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Price Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Revenue Growth</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Margin Improvement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discount Approval Risk Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Discount Approval Risk</div>
+                            <div class="card-subtitle">Risk Assessment</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict the risk associated with discount approvals by analyzing customer history, deal characteristics, and margin impact.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Discount Analysis</span>
+                            <span class="tech-tag">Margin Impact</span>
+                            <span class="tech-tag">Approval Workflow</span>
+                            <span class="tech-tag">Deal Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Discount Request → Risk Analysis → Approval → Implementation → Monitoring → Optimization</div>
+                            <div class="architecture-item">Request Data → Analysis → Approval → Implementation → Results → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer discount history</li>
+                                <li>Deal characteristics</li>
+                                <li>Margin thresholds</li>
+                                <li>Approval patterns</li>
+                                <li>Risk factors</li>
+                                <li>Revenue impact</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Risk Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Approval Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Margin Protection</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📈</div>
+                        <div>
+                            <div class="card-title">Revenue Forecasting</div>
+                            <div class="card-subtitle">Financial Prediction</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict future revenue streams by analyzing historical sales data, contract terms, renewal patterns, and market trends.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Revenue Forecasting</span>
+                            <span class="tech-tag">Financial Analysis</span>
+                            <span class="tech-tag">Contract Analysis</span>
+                            <span class="tech-tag">Trend Analysis</span>
+                            <span class="tech-tag">Financial Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Historical Data → Trend Analysis → Forecasting → Revenue Prediction → Planning → Optimization</div>
+                            <div class="architecture-item">Sales Data → Analysis → Forecasting → Revenue → Planning → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical revenue data</li>
+                                <li>Contract terms</li>
+                                <li>Renewal patterns</li>
+                                <li>Market trends</li>
+                                <li>Customer behavior</li>
+                                <li>Seasonal factors</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Forecasting Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Revenue Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Planning Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upsell Propensity Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🚀</div>
+                        <div>
+                            <div class="card-title">Upsell Propensity</div>
+                            <div class="card-subtitle">Growth Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict customer propensity for upselling based on usage patterns, satisfaction levels, and product adoption.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Upsell Prediction</span>
+                            <span class="tech-tag">Customer Analysis</span>
+                            <span class="tech-tag">Usage Patterns</span>
+                            <span class="tech-tag">Growth Opportunities</span>
+                            <span class="tech-tag">Revenue Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Data → Usage Analysis → Propensity Modeling → Upsell → Strategy → Revenue</div>
+                            <div class="architecture-item">Customer Data → Analysis → Modeling → Upsell → Strategy → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer usage patterns</li>
+                                <li>Satisfaction metrics</li>
+                                <li>Product adoption</li>
+                                <li>Historical upsells</li>
+                                <li>Customer segments</li>
+                                <li>Revenue potential</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Upsell Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Revenue Growth</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contract Renewal Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">📋</div>
+                        <div>
+                            <div class="card-title">Contract Renewal</div>
+                            <div class="card-subtitle">Retention Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict contract renewal likelihood by analyzing customer satisfaction, usage patterns, and historical renewal behavior.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Renewal Prediction</span>
+                            <span class="tech-tag">Customer Retention</span>
+                            <span class="tech-tag">Contract Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Retention Strategy</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Contract Data → Satisfaction Analysis → Renewal Prediction → Strategy → Retention → Success</div>
+                            <div class="architecture-item">Customer Data → Analysis → Prediction → Strategy → Retention → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Contract terms</li>
+                                <li>Customer satisfaction</li>
+                                <li>Usage patterns</li>
+                                <li>Historical renewals</li>
+                                <li>Competitive factors</li>
+                                <li>Service quality</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Renewal Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Retention Rate</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Default Risk Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Payment Default Risk</div>
+                            <div class="card-subtitle">Credit Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict the risk of payment defaults by analyzing customer payment history, financial health, and market conditions.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Credit Risk</span>
+                            <span class="tech-tag">Payment Analysis</span>
+                            <span class="tech-tag">Financial Health</span>
+                            <span class="tech-tag">Default Prediction</span>
+                            <span class="tech-tag">Risk Mitigation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Payment Data → Credit Analysis → Risk Prediction → Mitigation → Monitoring → Prevention</div>
+                            <div class="architecture-item">Customer Data → Analysis → Risk → Mitigation → Monitoring → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Payment history</li>
+                                <li>Financial statements</li>
+                                <li>Credit scores</li>
+                                <li>Market conditions</li>
+                                <li>Industry factors</li>
+                                <li>Payment patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Risk Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Default Prevention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Cash Flow</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, communication, and analysis for contract management, billing, and revenue operations
+            </p>
+
+            <div class="card-grid">
+                <!-- Quote Generation Assistance -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📄</div>
+                        <div>
+                            <div class="card-title">Quote Generation</div>
+                            <div class="card-subtitle">CPQ Automation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive quotes with optimized pricing, product configurations, and terms based on customer requirements and business rules.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Quote Generation</span>
+                            <span class="tech-tag">CPQ Automation</span>
+                            <span class="tech-tag">Pricing Strategy</span>
+                            <span class="tech-tag">Product Configuration</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Requirements → Product Configuration → Pricing → Quote Generation → Review → Approval</div>
+                            <div class="architecture-item">Requirement Data → Configuration → Pricing → Generation → Review → Delivery</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer requirements</li>
+                                <li>Product catalogs</li>
+                                <li>Pricing rules</li>
+                                <li>Business logic</li>
+                                <li>Discount structures</li>
+                                <li>Contract terms</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Quote Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Generation Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Win Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contract Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Contract Drafting</div>
+                            <div class="card-subtitle">Legal Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive contracts with customized terms, clauses, and legal language based on deal specifics and compliance requirements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Contract Generation</span>
+                            <span class="tech-tag">Legal Documentation</span>
+                            <span class="tech-tag">Compliance</span>
+                            <span class="tech-tag">Terms & Conditions</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Deal Terms → Legal Analysis → Contract Drafting → Review → Approval → Execution</div>
+                            <div class="architecture-item">Deal Data → Analysis → Drafting → Review → Approval → Execution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Deal specifications</li>
+                                <li>Legal templates</li>
+                                <li>Compliance requirements</li>
+                                <li>Industry standards</li>
+                                <li>Risk factors</li>
+                                <li>Approval workflows</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Contract Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Compliance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Drafting Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Explanation Summaries -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💰</div>
+                        <div>
+                            <div class="card-title">Pricing Explanations</div>
+                            <div class="card-subtitle">Price Justification</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate clear, comprehensive explanations for pricing decisions and structures to improve customer understanding and acceptance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Pricing Communication</span>
+                            <span class="tech-tag">Price Justification</span>
+                            <span class="tech-tag">Customer Education</span>
+                            <span class="tech-tag">Value Communication</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Pricing Data → Analysis → Explanation → Communication → Understanding → Acceptance</div>
+                            <div class="architecture-item">Price Data → Analysis → Explanation → Communication → Understanding → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Pricing structures</li>
+                                <li>Cost breakdowns</li>
+                                <li>Value propositions</li>
+                                <li>Market comparisons</li>
+                                <li>Customer context</li>
+                                <li>Communication style</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Explanation Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Customer Understanding</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Price Acceptance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Dispute Communication -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💬</div>
+                        <div>
+                            <div class="card-title">Billing Dispute</div>
+                            <div class="card-subtitle">Customer Communication</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate professional, empathetic responses to billing disputes with clear explanations and resolution proposals.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Dispute Resolution</span>
+                            <span class="tech-tag">Customer Communication</span>
+                            <span class="tech-tag">Billing Analysis</span>
+                            <span class="tech-tag">Resolution Proposals</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Dispute Details → Analysis → Response Generation → Communication → Resolution → Follow-up</div>
+                            <div class="architecture-item">Dispute Data → Analysis → Response → Communication → Resolution → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Dispute details</li>
+                                <li>Billing records</li>
+                                <li>Customer history</li>
+                                <li>Resolution policies</li>
+                                <li>Communication guidelines</li>
+                                <li>Escalation procedures</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Dispute Resolution</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Reports Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📊</div>
+                        <div>
+                            <div class="card-title">Revenue Reports</div>
+                            <div class="card-subtitle">Financial Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive revenue reports with insights, trends, and recommendations for business stakeholders.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Report Generation</span>
+                            <span class="tech-tag">Financial Analysis</span>
+                            <span class="tech-tag">Revenue Insights</span>
+                            <span class="tech-tag">Business Intelligence</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Revenue Data → Analysis → Insights → Report Generation → Review → Distribution</div>
+                            <div class="architecture-item">Data Input → Analysis → Insights → Generation → Review → Delivery</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Revenue data</li>
+                                <li>Financial metrics</li>
+                                <li>Trend analysis</li>
+                                <li>Business context</li>
+                                <li>Stakeholder requirements</li>
+                                <li>Reporting standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Insight Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 minutes</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Plan Recommendations -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🔄</div>
+                        <div>
+                            <div class="card-title">Subscription Plans</div>
+                            <div class="card-subtitle">Plan Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate personalized subscription plan recommendations based on customer usage patterns, needs, and budget considerations.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Plan Recommendations</span>
+                            <span class="tech-tag">Usage Analysis</span>
+                            <span class="tech-tag">Customer Needs</span>
+                            <span class="tech-tag">Budget Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Usage Data → Needs Analysis → Plan Matching → Recommendation → Presentation → Selection</div>
+                            <div class="architecture-item">Customer Data → Analysis → Matching → Recommendation → Presentation → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Usage patterns</li>
+                                <li>Customer needs</li>
+                                <li>Budget constraints</li>
+                                <li>Plan features</li>
+                                <li>Value propositions</li>
+                                <li>Upgrade paths</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Recommendation Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Plan Fit</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex revenue operations and contract management workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Autonomous CPQ Configuration Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🤖</div>
+                        <div>
+                            <div class="card-title">Autonomous CPQ</div>
+                            <div class="card-subtitle">Configuration Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate CPQ (Configure, Price, Quote) processes by analyzing customer requirements and generating optimal product configurations and pricing.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Autonomous CPQ</span>
+                            <span class="tech-tag">Product Configuration</span>
+                            <span class="tech-tag">Pricing Automation</span>
+                            <span class="tech-tag">Quote Generation</span>
+                            <span class="tech-tag">Business Rules</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Customer Requirements → Product Analysis → Configuration → Pricing → Quote → Approval</div>
+                            <div class="architecture-item">Requirement Data → Analysis → Configuration → Pricing → Quote → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Product catalogs</li>
+                                <li>Configuration rules</li>
+                                <li>Pricing models</li>
+                                <li>Customer requirements</li>
+                                <li>Business logic</li>
+                                <li>Approval workflows</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Configuration Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Pricing Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Quote Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Pricing Optimization Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">💰</div>
+                        <div>
+                            <div class="card-title">Dynamic Pricing</div>
+                            <div class="card-subtitle">Price Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Continuously optimize pricing strategies by monitoring market conditions, competitor pricing, and customer behavior in real-time.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Dynamic Pricing</span>
+                            <span class="tech-tag">Market Monitoring</span>
+                            <span class="tech-tag">Competitor Analysis</span>
+                            <span class="tech-tag">Price Optimization</span>
+                            <span class="tech-tag">Revenue Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Market Data → Analysis → Price Adjustment → Implementation → Monitoring → Optimization</div>
+                            <div class="architecture-item">Market Data → Analysis → Adjustment → Implementation → Monitoring → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Market conditions</li>
+                                <li>Competitor pricing</li>
+                                <li>Customer demand</li>
+                                <li>Inventory levels</li>
+                                <li>Cost structures</li>
+                                <li>Revenue targets</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Price Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Revenue Growth</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Market Responsiveness</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Leakage Monitoring Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔍</div>
+                        <div>
+                            <div class="card-title">Revenue Leakage</div>
+                            <div class="card-subtitle">Leakage Detection</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Continuously monitor revenue streams to identify and prevent revenue leakage through pricing errors, billing issues, and contract gaps.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Revenue Monitoring</span>
+                            <span class="tech-tag">Leakage Detection</span>
+                            <span class="tech-tag">Billing Analysis</span>
+                            <span class="tech-tag">Contract Compliance</span>
+                            <span class="tech-tag">Revenue Protection</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Revenue Data → Analysis → Leakage Detection → Investigation → Prevention → Recovery</div>
+                            <div class="architecture-item">Revenue Data → Analysis → Detection → Investigation → Prevention → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Revenue streams</li>
+                                <li>Billing records</li>
+                                <li>Contract terms</li>
+                                <li>Pricing rules</li>
+                                <li>Discount structures</li>
+                                <li>Compliance requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Leakage Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Revenue Recovery</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Compliance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Renewal Orchestration Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔄</div>
+                        <div>
+                            <div class="card-title">Renewal Orchestration</div>
+                            <div class="card-subtitle">Contract Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate contract renewal processes by analyzing renewal opportunities, preparing proposals, and coordinating with stakeholders.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Renewal Automation</span>
+                            <span class="tech-tag">Contract Management</span>
+                            <span class="tech-tag">Proposal Generation</span>
+                            <span class="tech-tag">Stakeholder Coordination</span>
+                            <span class="tech-tag">Renewal Success</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Contract Data → Analysis → Proposal → Coordination → Negotiation → Renewal</div>
+                            <div class="architecture-item">Contract Data → Analysis → Proposal → Coordination → Negotiation → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Contract terms</li>
+                                <li>Renewal timelines</li>
+                                <li>Customer satisfaction</li>
+                                <li>Market conditions</li>
+                                <li>Competitive analysis</li>
+                                <li>Stakeholder information</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Renewal Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Process Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Lifecycle Management Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">📊</div>
+                        <div>
+                            <div class="card-title">Subscription Lifecycle</div>
+                            <div class="card-subtitle">Subscription Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Manage the complete subscription lifecycle from onboarding through renewal, including upgrades, downgrades, and churn prevention.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Subscription Management</span>
+                            <span class="tech-tag">Lifecycle Automation</span>
+                            <span class="tech-tag">Churn Prevention</span>
+                            <span class="tech-tag">Plan Management</span>
+                            <span class="tech-tag">Customer Retention</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Subscription Data → Lifecycle Management → Monitoring → Optimization → Retention → Growth</div>
+                            <div class="architecture-item">Subscription Data → Management → Monitoring → Optimization → Retention → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Subscription terms</li>
+                                <li>Usage patterns</li>
+                                <li>Customer behavior</li>
+                                <li>Plan options</li>
+                                <li>Churn indicators</li>
+                                <li>Retention strategies</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Lifecycle Management</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Churn Prevention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Customer Retention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Billing Automation Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">💳</div>
+                        <div>
+                            <div class="card-title">Billing Automation</div>
+                            <div class="card-subtitle">Invoice Management</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate billing processes including invoice generation, payment processing, and dispute resolution to improve accuracy and efficiency.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Billing Automation</span>
+                            <span class="tech-tag">Invoice Generation</span>
+                            <span class="tech-tag">Payment Processing</span>
+                            <span class="tech-tag">Dispute Resolution</span>
+                            <span class="tech-tag">Cash Flow</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Billing Data → Invoice Generation → Payment Processing → Dispute Resolution → Reconciliation → Reporting</div>
+                            <div class="architecture-item">Billing Data → Generation → Processing → Resolution → Reconciliation → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Customer contracts</li>
+                                <li>Billing schedules</li>
+                                <li>Payment terms</li>
+                                <li>Invoice templates</li>
+                                <li>Payment methods</li>
+                                <li>Dispute policies</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Billing Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Processing Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Dispute Resolution</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of revenue management and contract operations</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of financial compliance, data security, and customer privacy
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
